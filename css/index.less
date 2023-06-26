@@ -1,0 +1,245 @@
+/* 通用样式 */
+@com-red: #e60026;
+@con-green: #31c27c;
+@com-gray: rgba(255, 255, 255, .5);
+
+.text-clip {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+
+html {
+    font-size: 100px; //1rem=100px[]
+}
+
+html,
+body,
+#app {
+    height: 100%;
+    overflow: hidden;
+}
+
+#app {
+    position: relative;
+    margin: 0 auto;
+    max-width: 540px;
+    font-size: .14rem;
+}
+
+
+.header-box,
+.footer-box,
+.main-box {
+    box-sizing: border-box;
+    height: 1rem;
+    overflow: hidden;
+}
+
+.main-box {
+    .wrapper {
+        transform: translateY(0);
+    }
+
+    height: calc(100vh - 2rem);
+}
+
+/* 头部区域样式 */
+.header-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .15rem;
+
+    .player-button {
+        margin-left: .05rem;
+        width: .35rem;
+        height: .35rem;
+        background: url('../images/sprite_play.png') no-repeat;
+        background-position: 0rem -2rem;
+
+        /* &.move {
+            animation: musicMove 1s linear 0s infinite both;
+        } */
+    }
+
+    .base {
+        flex-grow: 1;
+        display: flex;
+
+        .cover {
+            width: .7rem;
+            height: .7rem;
+            background: #AAA;
+
+            img {
+                display: block;
+                width: 100%;
+                height: 100%;
+            }
+
+            img[src=""] {
+                display: none;
+            }
+        }
+
+        .info {
+            flex-grow: 1;
+            margin-left: .05rem;
+            max-width: 2.3rem;
+
+            .title,
+            .author {
+                line-height: .35rem;
+                color: #fff;
+                font-size: .17rem;
+                .text-clip;
+            }
+
+            .author {
+                font-size: .15rem;
+            }
+        }
+    }
+}
+
+@keyframes musicMove {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* 歌词区域样式 */
+.main-box {
+    .wrapper {
+        transform: translateY(0);
+        transition: transform .3s;
+
+        p {
+            height: .5rem;
+            line-height: .5rem;
+            text-align: center;
+            font-size: .15rem;
+            color: @com-gray;
+
+            &.active {
+                color: @com-red;
+                transition: color .3s;
+            }
+        }
+    }
+}
+
+/* Loading层 */
+.loading-box {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    box-sizing: border-box;
+    width: 100vw;
+    height: 100vh;
+    background: #555;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    p {
+        margin-left: 5px;
+    }
+}
+
+
+
+/* 背景层 */
+.mark-overlay,
+.mark-image {
+    position: absolute;
+    top: -10%;
+    left: -10%;
+    width: 120%;
+    height: 120%;
+}
+
+.mark-image {
+    z-index: -2;
+    // background: url('../images/myDream.jpg') no-repeat;
+    background-repeat: no-repeat;
+    background-size: cover; //模糊
+    filter: blur(6px)
+}
+
+.mark-overlay {
+    z-index: -1;
+    background: rgba(0, 0, 0, .5);
+}
+
+.footer-box {
+    padding: 0 .1rem;
+
+    .download {
+        display: block;
+        margin: 0 auto;
+        width: 2.13rem;
+        height: .45rem;
+        line-height: .45rem;
+        text-align: center;
+        justify-content: center;
+        font-size: .18rem;
+        color: #fff;
+        // text-indent: .2rem;
+        border-radius: .25rem;
+        background: @com-red;
+        // background-size: .4rem 3.48rem;
+        // background-position: .15rem -2.915rem;
+    }
+
+    .bar {
+        display: flex;
+        align-items: center;
+
+        .time {
+            width: .4rem;
+            line-height: .46rem;
+            text-align: center;
+            font-size: .12rem;
+            color: @com-gray;
+        }
+
+        .progress {
+            position: relative;
+            flex-grow: 1;
+            height: .02rem;
+            background: @com-gray;
+
+            .already {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 0;
+                height: 100%;
+                background: @con-green;
+                border-radius: 2px;
+
+                .progress-bar {
+                    height: 100%;
+                    background-color: #ff4081;
+                    border-radius: 2px;
+                    width: 0;
+                }
+            }
+        }
+    }
+}
+
+
+
+
+#audioBox {
+    display: none;
+}
